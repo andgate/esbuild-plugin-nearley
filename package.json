@@ -1,0 +1,57 @@
+{
+  "name": "esbuild-plugin-nearley",
+  "description": "Esbuild plugin for nearley grammar files.",
+  "version": "1.0.3",
+  "author": "Gabriel Anderson",
+  "license": "MIT",
+  "engines": {
+    "pnpm": ">=6",
+    "npm": ">=8",
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andgate/esbuild-plugin-nearley.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andgate/esbuild-plugin-nearley/issues"
+  },
+  "main": "./dist/index.js",
+  "publishConfig": {
+    "main": "./dist/index.js",
+    "access": "public"
+  },
+  "files": [
+    "dist/",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "pnpm watch",
+    "build": "pnpm clean && pnpm build:plugin",
+    "build:plugin": "tsc --project tsconfig.build.json && node build.js",
+    "clean": "rimraf dist/ *.tsbuildinfo",
+    "watch": "concurrently \"pnpm:watch:*\"",
+    "watch:js": "node build.js --watch",
+    "watch:ts": "tsc --project tsconfig.build.json --watch",
+    "check": "tsc --project tsconfig.build.json --noEmit",
+    "prettier": "prettier --check index.js",
+    "prettier:fix": "prettier --write index.js",
+    "lint": "eslint src/** tests/** --ext .js",
+    "lint:fix": "pnpm lint --fix",
+    "verify": "pnpm prettier && pnpm lint",
+    "verify:fix": "pnpm prettier:fix && pnpm lint:fix"
+  },
+  "peerDependencies": {
+    "nearley": "^2",
+    "esbuild": "^0.14"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.10",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.5",
+    "@types/nearley": "^2.11.2",
+    "esbuild": "^0.14.10",
+    "nearley": "^2.20.1"
+  }
+}
