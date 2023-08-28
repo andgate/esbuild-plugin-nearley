@@ -11,11 +11,15 @@ import { Plugin, PluginBuild } from 'esbuild'
 export type NearleyPluginOptions = {
   export: string
   quiet: boolean
+
+  // TODO: Auto-detection would be preferable. See Nearley directive `@preprocessor`.
+  loader: 'js' | 'ts'
 }
 
 const defaultNearleyPluginOptions: NearleyPluginOptions = {
   export: 'grammar',
-  quiet: false
+  quiet: false,
+  loader: 'js'
 }
 
 const parserGrammar = nearley.Grammar.fromCompiled(nearleyGrammar)
@@ -71,7 +75,7 @@ export function NearlyPlugin(
 
         return {
           contents,
-          loader: 'js',
+          loader: opts.loader,
           resolveDir: path.dirname(ns_path),
           watchFiles: [ns_path]
         }
