@@ -30,6 +30,7 @@
     "start": "pnpm watch",
     "build": "pnpm clean && pnpm build:plugin",
     "build:plugin": "tsc --project tsconfig.build.json && node build.js",
+    "prepare": "npm run build",
     "clean": "rimraf dist/ *.tsbuildinfo",
     "watch": "concurrently \"pnpm:watch:*\"",
     "watch:js": "node build.js --watch",
